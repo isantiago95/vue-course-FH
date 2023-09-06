@@ -17,8 +17,17 @@ export default createStore({
   actions: {
   },
   getters: {
-    pendingTodos(state, getters, rootState) {
-      return state.todos.filter(t => !t.completed);
+    pendingTodos: (state, getters, rootState) => state.todos.filter(t => !t.completed),
+    completedTodos: (state, getters, rootState) => state.todos.filter(t => t.completed),
+    allTodos: (state, getters, rootState) => state.todos,
+    getTodosByTab: (_, getters) => (tab) => {
+      const options = {
+        all: getters.allTodos,
+        pending: getters.pendingTodos,
+        completed: getters.completedTodos
+      };
+
+      return options[tab];
     }
   },
   modules: {
