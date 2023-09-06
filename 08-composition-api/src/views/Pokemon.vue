@@ -12,7 +12,7 @@
 
 <script>
 import { watch } from 'vue';
-import { useRoute } from 'vue-router';
+import { onBeforeRouteLeave, useRoute } from 'vue-router';
 import usePokemon from '../hooks/usePokemon';
 
 export default {
@@ -26,6 +26,10 @@ export default {
             () => route.params.id,
             () => searchPokemon(route.params.id)
         );
+
+        onBeforeRouteLeave(() => {
+            if (!window.confirm('Seguro que desea salir?')) return false;
+        });
 
         return {
             pokemon, isLoading, errorMessage
