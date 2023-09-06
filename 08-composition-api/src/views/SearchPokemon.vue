@@ -30,10 +30,7 @@ export default {
             pokemonId,
             txtSearchId,
 
-            onSubmit: () => {
-                console.log('Pokemon a buscar: ', pokemonId.value);
-                router.push({ name: 'pokemon-id', params: { id: pokemonId.value } });
-            }
+            onSubmit: () => router.push({ name: 'pokemon-id', params: { id: pokemonId.value } })
         };
     }
 };
