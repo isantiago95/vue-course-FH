@@ -24,13 +24,13 @@ export default {
 
   setup() {
     const ironman = ref({ name: 'Tony', edad: 50 });
-    const hulk = reactive({ name: 'Bruce', edad: 50 });
-    const ironmanIsAlive = reactive(false);
+    const hulk = ref({ name: 'Bruce', edad: 50 });
+    const ironmanIsAlive = ref(false);
     const hulkIsAlive = ref(true);
 
     const changeStatus = () => {
       hulkIsAlive.value = !hulkIsAlive.value;
-      ironmanIsAlive = !ironmanIsAlive;
+      ironmanIsAlive.value = !ironmanIsAlive.value;
     };
 
     return {
@@ -41,8 +41,8 @@ export default {
         ironman.value.age = 55;
       },
       changeHulk: () => {
-        hulk.name = 'Bruce Banner';
-        hulk.edad = 45;
+        hulk.value.name = 'Bruce Banner';
+        hulk.value.edad = 45;
       },
       changeStatus
     };
