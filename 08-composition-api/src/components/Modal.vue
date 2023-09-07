@@ -1,15 +1,10 @@
 <template>
-    <div class="modal-background fade-in">
+    <div class="modal-background fade-in"
+        @click.self="$emit('on:close')">
         <div class="modal-container">
-
             <slot name="header" />
             <slot name="body" />
             <slot name="footer" />
-            <!-- <slot>
-                <div class="center">
-                    <h2>Esto aparecerá si no hay contenido</h2>
-                </div>
-            </slot> -->
         </div>
     </div>
 </template>
@@ -17,10 +12,15 @@
 <script>
 
 export default {
-
+    emits: ['on:close'],
+    props: {
+        title: {
+            type: String,
+            required: true
+        }
+    },
     setup(props, context) {
-
-
+        console.log({ props, context });
     }
 };
 </script>
