@@ -13,6 +13,12 @@
         <template v-slot:header>
             <h2>Titulo del modal</h2>
         </template>
+
+        <template v-slot:exposed="slotProps">
+            <h2>
+                {{ slotProps }}
+            </h2>
+        </template>
     </modal>
 </template>
 

@@ -5,6 +5,8 @@
             <slot name="header" />
             <slot name="body" />
             <slot name="footer" />
+
+            <slot name="exposed" :newTitle="newTitle" hola="mundo"></slot>
         </div>
     </div>
 </template>
@@ -16,11 +18,15 @@ export default {
     props: {
         title: {
             type: String,
-            required: true
+            required: false
         }
     },
     setup(props, context) {
         console.log({ props, context });
+
+        return {
+            newTitle: props.title?.toUpperCase()
+        };
     }
 };
 </script>

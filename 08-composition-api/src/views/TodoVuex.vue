@@ -28,20 +28,62 @@
             </li>
         </ul>
     </div>
+
+    <button @click="openModal">New item</button>
+
+    <Modal v-if="isOpen" @on:close="closeModal">
+        <template v-slot:header>
+            <h2>Add new to-do</h2>
+        </template>
+        <template v-slot:body>
+            <form @submit.prevent="createTodo(txtNewItem); closeModal()">
+                <input type="text"
+                    placeholder="New item description"
+                    v-model="txtNewItem"
+                    ref="txtRef" />
+                <br>
+                <br>
+                <button type="submit">Create</button>
+            </form>
+        </template>
+    </Modal>
 </template>
 
 <script>
+import { onActivated, ref } from 'vue';
 import useTodos from '../hooks/useTodos';
+import Modal from '../components/Modal.vue';
 
 export default {
+
+    components: {
+        Modal
+    },
+
     setup() {
-        const { currentTab, pending, getTodosByTab, toggleTodo } = useTodos();
+        const { currentTab, pending, getTodosByTab, toggleTodo, createTodo } = useTodos();
+
+        const isOpen = ref(false);
+        const txtRef = ref();
+        const txtNewItem = ref("");
+
+        onActivated(() => {
+            if (txtRef.value) txtRef.value.select();
+        });
 
         return {
+            closeModal: () => isOpen.value = false,
+            isOpen,
+            openModal: () => isOpen.value = true,
+
+            txtRef,
+            txtNewItem,
+
+            createTodo,
             currentTab,
             getTodosByTab,
             pending,
-            toggleTodo
+            toggleTodo,
         };
     }
 }
