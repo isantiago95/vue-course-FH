@@ -2,25 +2,26 @@
     <span class="login100-form-title p-b-41">
         Register
     </span>
-    <form class="login100-form validate-form p-b-33 p-t-5">
+    <form class="login100-form validate-form p-b-33 p-t-5"
+        @submit.prevent="onSubmit">
 
         <div class="wrap-input100 validate-input" data-validate="Enter name">
-            <input class="input100" type="text" placeholder="name" required>
+            <input v-model="userForm.name" class="input100" type="text" placeholder="name" required>
             <span class="focus-input100" data-placeholder="&#xe82a;"></span>
         </div>
 
         <div class="wrap-input100 validate-input" data-validate="Enter email">
-            <input class="input100" type="email" placeholder="email" required>
+            <input v-model="userForm.email" class="input100" type="email" placeholder="email" required>
             <span class="focus-input100" data-placeholder="&#xe818;"></span>
         </div>
 
         <div class="wrap-input100 validate-input" data-validate="Enter password">
-            <input class="input100" type="password" placeholder="password" required>
+            <input v-model="userForm.password" class="input100" type="password" placeholder="password" required>
             <span class="focus-input100" data-placeholder="&#xe80f;"></span>
         </div>
 
         <div class="container-login100-form-btn m-t-32">
-            <button class="login100-form-btn">
+            <button type="submit" class="login100-form-btn">
                 Create account
             </button>
 
@@ -33,7 +34,27 @@
 </template>
 
 <script>
+import { ref } from 'vue';
+import useAuth from '../hooks/useAuth';
+
 export default {
 
+    setup() {
+        const { createUser } = useAuth();
+
+        const userForm = ref({
+            name: 'klart kent',
+            email: 'superman@gmail.com',
+            password: '123456',
+        });
+
+        return {
+            userForm,
+            onSubmit: async () => {
+                const { ok, message } = await createUser(userForm.value);
+                console.log({ ok, message });
+            }
+        };
+    }
 };
 </script>
