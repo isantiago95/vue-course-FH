@@ -55,7 +55,6 @@ export default {
             userForm,
             onSubmit: async () => {
                 const { ok, message } = await createUser(userForm.value);
-                console.log({ ok, message });
 
                 if (!ok) return Swal.fire('Error', message, 'error');
 

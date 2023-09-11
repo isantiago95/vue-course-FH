@@ -1,6 +1,7 @@
+import { AUTH_STATUS } from '../../../constants';
 
 export default () => ({
-    status: 'authenticating', // "authenticated", 'non-authenticated, "authenticating"
+    status: AUTH_STATUS.AUTHENTICATING,
     user: null,
     idToken: null,
     refreshToken: null

@@ -1,3 +1,4 @@
+import { AUTH_STATUS } from '../../../constants';
 
 const saveItem = (name, item, state) => {
     if (item) {
@@ -12,5 +13,15 @@ export const loginUser = (state, { user, idToken, refreshToken }) => {
     saveItem('refreshToken', refreshToken, state);
 
     state.user = user;
-    state.status = 'authenticated';
+    state.status = AUTH_STATUS.AUTHENTICATED;
+};
+
+export const logOut = (state) => {
+    state.user = null;
+    state.idToken = null;
+    state.refreshToken = null;
+    state.status = AUTH_STATUS.NON_AUTHENTICATED;
+
+    localStorage.removeItem('idToken');
+    localStorage.removeItem('refreshToken');
 };
