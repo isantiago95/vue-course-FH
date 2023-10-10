@@ -1,35 +1,27 @@
 <template>
-  <div class="options-container">
-    <ul>
-      <li v-for="pokemon in pokemons" 
-          :key="pokemon.id"
-          @click="$emit( 'selectionPokemon', pokemon.id )">
-          {{ pokemon.name }}
-      </li>
-    </ul>
-  </div>
+    <div class="options-container">
+        <ul>
+            <li>1</li>
+            <li>2</li>
+            <li>3</li>
+            <li>4</li>
+        </ul>
+    </div>
 </template>
 
 <script>
 export default {
-  props: {
-    pokemons: {
-      type: Array,
-      required: true
-    }
-  },
-  methods: {
-    hola(){
-      // this.$emit()
-    }
-  }
-}
+    name: 'PokemonOptions',
+
+
+};
 </script>
 
 <style scoped>
 ul {
     list-style-type: none;
 }
+
 li {
     background-color: white;
     border-radius: 5px;

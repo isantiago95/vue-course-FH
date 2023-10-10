@@ -1,9 +1,10 @@
-import { createRouter, createWebHashHistory } from 'vue-router';
-import Home from '../views/Home.vue';
+import { createRouter, createWebHashHistory } from 'vue-router'
+import Home from '../views/Home.vue'
 
-import authRouter from '../modules/auth/router';
-import daybookRouter from '../modules/daybook/router';
-import isAuthenticated from '../modules/auth/router/auth-guard';
+import isAuthenticatedGuard from '../modules/auth/router/auth-guard'
+
+import authRouter from '../modules/auth/router'
+import daybookRouter from '../modules/daybook/router'
 
 const routes = [
   {
@@ -21,18 +22,18 @@ const routes = [
   },
   {
     path: '/auth',
-    ...authRouter
+    ...authRouter,
   },
   {
     path: '/daybook',
-    beforeEnter: [isAuthenticated],
+    beforeEnter: [ isAuthenticatedGuard ],
     ...daybookRouter
   }
-];
+]
 
 const router = createRouter({
   history: createWebHashHistory(),
   routes
-});
+})
 
-export default router;
+export default router

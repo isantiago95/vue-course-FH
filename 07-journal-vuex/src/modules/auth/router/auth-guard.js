@@ -1,12 +1,12 @@
-import store from '@/store';
-
-const isAuthenticated = async (to, from, next) => {
-
-    const { ok } = await store.dispatch('auth/checkAuthentication');
+import store from '@/store'
 
 
-    if (ok) next();
-    else next({ name: 'login' });
-};
+const isAuthenticatedGuard = async( to, from, next ) => {
 
-export default isAuthenticated;
+    const { ok } = await store.dispatch('auth/checkAuthentication')
+
+    if ( ok ) next()
+    else next({ name: 'login' })
+}
+
+export default isAuthenticatedGuard

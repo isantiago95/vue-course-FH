@@ -27,17 +27,24 @@ export default {
         async getAnswer() {
             this.answer = 'Pensando...';
 
-            const { answer, image } = await fetch('https://yesno.wtf/api').then(res => res.json());
-            this.answer = answer === "yes" ? 'Si' : answer;
-            this.img = image;
+            try {
+                const { answer, image } = await fetch('https://yesno.wtf/api').then(res => res.json());
+                this.answer = answer === "yes" ? 'Si!' : answer;
+                this.img = image;
+            } catch (error) {
+                this.answer = 'No se pudo conectar con el servidor';
+                this.img = null;
+            }
         }
     },
 
     watch: {
-        question(newValue) {
+        question(value) {
             this.isValidQuestion = false;
 
-            if (!newValue.includes('?')) return;
+            console.log({ value });
+
+            if (!value.includes('?')) return;
 
             this.isValidQuestion = true;
             this.getAnswer();

@@ -1,27 +1,33 @@
-import { AUTH_STATUS } from '../../../constants';
 
-const saveItem = (name, item, state) => {
-    if (item) {
-        localStorage.setItem(name, JSON.stringify(item));
-        state[name] = item;
+// export const myAction = ( state ) => {
+
+// }
+
+
+export const loginUser = ( state, { user, idToken, refreshToken }) => {
+
+    if ( idToken ) {
+        localStorage.setItem( 'idToken', idToken )
+        state.idToken = idToken
     }
-};
 
-export const loginUser = (state, { user, idToken, refreshToken }) => {
+    if ( refreshToken ) {
+        localStorage.setItem( 'refreshToken', refreshToken )
+        state.refreshToken = refreshToken
+    }
 
-    saveItem('idToken', idToken, state);
-    saveItem('refreshToken', refreshToken, state);
+    state.user   = user
+    state.status = 'authenticated'
+}
 
-    state.user = user;
-    state.status = AUTH_STATUS.AUTHENTICATED;
-};
 
-export const logOut = (state) => {
-    state.user = null;
-    state.idToken = null;
-    state.refreshToken = null;
-    state.status = AUTH_STATUS.NON_AUTHENTICATED;
+export const logout = (state) => {
+    
+    state.user = null
+    state.idToken = null
+    state.refreshToken = null
+    state.status = 'not-authenticated'
 
-    localStorage.removeItem('idToken');
-    localStorage.removeItem('refreshToken');
-};
+    localStorage.removeItem('idToken')
+    localStorage.removeItem('refreshToken')
+}
